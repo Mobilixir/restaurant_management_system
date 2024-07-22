@@ -10,5 +10,5 @@ defmodule ResmanWeb.Layouts do
   """
   use ResmanWeb, :html
 
-  embed_templates "layouts/*"
+  embed_templates "layouts/*.html"
 end

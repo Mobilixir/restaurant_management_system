@@ -61,6 +61,43 @@ config :logger, :console,
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 
+
+# LVN - Required
+# Registers each available plugin
+config :live_view_native, plugins: [
+  LiveViewNative.SwiftUI
+]
+
+# LVN - Required
+# Each format must be registered as a mime type add to
+# existing configuration if one exists as this will overwrite
+config :mime, :types, %{
+  "text/swiftui" => ["swiftui"],
+  "text/styles" => ["styles"]
+}
+
+# LVN - Required
+# Phoenix must know how to encode each LVN format
+config :phoenix_template, :format_encoders, [
+  swiftui: Phoenix.HTML.Engine
+]
+
+# LVN - Required
+# Phoenix must know how to compile neex templates
+config :phoenix, :template_engines, [
+  neex: LiveViewNative.Engine
+]
+
+# LVN - Required, you must configure LiveView Native Stylesheets
+# on where class names shoudl be extracted from
+config :live_view_native_stylesheet,
+  content: [
+    swiftui: [
+      "lib/**/*swiftui*"
+    ]
+  ],
+  output: "priv/static/assets"
+  
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{config_env()}.exs"

@@ -2,10 +2,14 @@ defmodule ResmanWeb.Router do
   use ResmanWeb, :router
 
   pipeline :browser do
-    plug :accepts, ["html"]
+    plug :accepts, ["html", "swiftui"]
     plug :fetch_session
     plug :fetch_live_flash
-    plug :put_root_layout, html: {ResmanWeb.Layouts, :root}
+
+    plug :put_root_layout,
+      html: {ResmanWeb.Layouts, :root},
+      swiftui: {ResmanWeb.Layouts.SwiftUI, :root}
+
     plug :protect_from_forgery
     plug :put_secure_browser_headers
   end
@@ -17,7 +21,7 @@ defmodule ResmanWeb.Router do
   scope "/", ResmanWeb do
     pipe_through :browser
 
-    get "/", PageController, :home
+    live "/", SampleLive
   end
 
   # Other scopes may use custom stacks.

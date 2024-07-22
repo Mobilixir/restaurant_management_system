@@ -5,7 +5,7 @@ defmodule Resman.MixProject do
     [
       app: :resman,
       version: "0.1.0",
-      elixir: "~> 1.14",
+      elixir: "~> 1.15",
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
@@ -58,7 +58,12 @@ defmodule Resman.MixProject do
       {:gettext, "~> 0.20"},
       {:jason, "~> 1.2"},
       {:dns_cluster, "~> 0.1.1"},
-      {:bandit, "~> 1.5"}
+      {:bandit, "~> 1.5"},
+      {:live_view_native, github: "liveview-native/live_view_native", branch: "main", override: true},
+      {:live_view_native_stylesheet, github: "liveview-native/live_view_native_stylesheet", branch: "main"},
+      {:live_view_native_swiftui, github: "liveview-native/liveview-client-swiftui", branch: "main"},
+      {:live_view_native_live_form, github: "liveview-native/liveview-native-live-form"},
+      {:live_view_native_jetpack, github: "liveview-native/liveview-client-jetpack", branch: "main"}
     ]
   end
 

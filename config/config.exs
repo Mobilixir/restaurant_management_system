@@ -9,7 +9,7 @@ import Config
 
 config :resman,
   ecto_repos: [Resman.Repo],
-  generators: [timestamp_type: :utc_datetime]
+  generators: [timestamp_type: :utc_datetime, binary_id: true]
 
 # Configures the endpoint
 config :resman, ResmanWeb.Endpoint,

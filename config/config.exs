@@ -11,6 +11,12 @@ config :resman,
   ecto_repos: [Resman.Repo],
   generators: [timestamp_type: :utc_datetime, binary_id: true]
 
+# Waffle storage setup
+config :waffle,
+  storage: Waffle.Storage.Local,
+  storage_dir_prefix: "priv/static",
+  storage_dir: "uploads"
+
 # Configures the endpoint
 config :resman, ResmanWeb.Endpoint,
   url: [host: "localhost"],
@@ -97,7 +103,7 @@ config :live_view_native_stylesheet,
     ]
   ],
   output: "priv/static/assets"
-  
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{config_env()}.exs"

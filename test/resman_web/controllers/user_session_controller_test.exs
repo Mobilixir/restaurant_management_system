@@ -1,7 +1,7 @@
-defmodule SnowPortalWeb.UserSessionControllerTest do
-  use SnowPortalWeb.ConnCase, async: true
-
-  import SnowPortal.AccountsFixtures
+defmodule ResmanWeb.UserSessionControllerTest do
+  use ResmanWeb.ConnCase, async: true
+  alias ResmanWeb.UserAuth
+  import Resman.AccountsFixtures
 
   setup do
     %{user: user_fixture()}
@@ -19,7 +19,7 @@ defmodule SnowPortalWeb.UserSessionControllerTest do
         })
 
       assert get_session(conn, :user_token)
-      assert redirected_to(conn) == ~p"/customer/dashboard"
+      assert redirected_to(conn) == ~p"/"
 
       # Now do a logged in request and assert on the menu
       conn = get(conn, ~p"/")
@@ -40,7 +40,7 @@ defmodule SnowPortalWeb.UserSessionControllerTest do
           }
         })
 
-      assert conn.resp_cookies["_snow_portal_web_user_remember_me"]
+      assert conn.resp_cookies["_resman_web_user_remember_me"]
       assert redirected_to(conn) == ~p"/customer/dashboard"
     end
 
@@ -72,7 +72,7 @@ defmodule SnowPortalWeb.UserSessionControllerTest do
           }
         })
 
-      assert redirected_to(conn) == ~p"/customer/dashboard"
+      assert redirected_to(conn) == ~p"/"
       assert Phoenix.Flash.get(conn.assigns.flash, :info) =~ "Account created successfully"
     end
 
@@ -109,7 +109,7 @@ defmodule SnowPortalWeb.UserSessionControllerTest do
 
   describe "DELETE /users/log_out" do
     test "logs the user out", %{conn: conn, user: user} do
-      conn = conn |> log_in_user(user) |> delete(~p"/users/log_out")
+      conn = conn |> UserAuth.log_in_user(user) |> delete(~p"/users/log_out")
       assert redirected_to(conn) == ~p"/"
       refute get_session(conn, :user_token)
       assert Phoenix.Flash.get(conn.assigns.flash, :info) =~ "Logged out successfully"

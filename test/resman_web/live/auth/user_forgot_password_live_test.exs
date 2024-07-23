@@ -1,11 +1,11 @@
-defmodule SnowPortalWeb.UserForgotPasswordLiveTest do
-  use SnowPortalWeb.ConnCase, async: true
+defmodule ResmanWeb.UserForgotPasswordLiveTest do
+  use ResmanWeb.ConnCase, async: true
 
   import Phoenix.LiveViewTest
-  import SnowPortal.AccountsFixtures
-
-  alias SnowPortal.Accounts
-  alias SnowPortal.Repo
+  import Resman.AccountsFixtures
+  alias ResmanWeb.UserAuth
+  alias Resman.Accounts
+  alias Resman.Repo
 
   describe "Forgot password page" do
     test "renders email page", %{conn: conn} do
@@ -19,7 +19,7 @@ defmodule SnowPortalWeb.UserForgotPasswordLiveTest do
     test "redirects if already logged in", %{conn: conn} do
       result =
         conn
-        |> log_in_user(user_fixture())
+        |> UserAuth.log_in_user(user_fixture())
         |> live(~p"/users/reset_password")
         |> follow_redirect(conn, ~p"/")
 

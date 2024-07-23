@@ -1,10 +1,10 @@
-defmodule SnowPortal.AccountsTest do
-  use SnowPortal.DataCase
+defmodule Resman.AccountsTest do
+  use Resman.DataCase
 
-  alias SnowPortal.Accounts
+  alias Resman.Accounts
 
-  import SnowPortal.AccountsFixtures
-  alias SnowPortal.Accounts.{User, UserToken}
+  import Resman.AccountsFixtures
+  alias Resman.Accounts.{User, UserToken}
 
   describe "get_user_by_email/1" do
     test "does not return the user if the email does not exist" do

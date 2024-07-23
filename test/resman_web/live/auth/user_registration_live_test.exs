@@ -1,8 +1,8 @@
-defmodule SnowPortalWeb.UserRegistrationLiveTest do
-  use SnowPortalWeb.ConnCase, async: true
-
+defmodule ResmanWeb.UserRegistrationLiveTest do
+  use ResmanWeb.ConnCase, async: true
+  alias ResmanWeb.UserAuth
   import Phoenix.LiveViewTest
-  import SnowPortal.AccountsFixtures
+  import Resman.AccountsFixtures
 
   describe "Registration page" do
     test "renders registration page", %{conn: conn} do
@@ -15,7 +15,7 @@ defmodule SnowPortalWeb.UserRegistrationLiveTest do
     test "redirects if already logged in", %{conn: conn} do
       result =
         conn
-        |> log_in_user(user_fixture())
+        |> UserAuth.log_in_user(user_fixture())
         |> live(~p"/users/register")
         |> follow_redirect(conn, "/")
 

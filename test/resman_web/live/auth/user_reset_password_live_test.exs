@@ -1,10 +1,10 @@
-defmodule SnowPortalWeb.UserResetPasswordLiveTest do
-  use SnowPortalWeb.ConnCase, async: true
+defmodule ResmanWeb.UserResetPasswordLiveTest do
+  use ResmanWeb.ConnCase, async: true
 
   import Phoenix.LiveViewTest
-  import SnowPortal.AccountsFixtures
+  import Resman.AccountsFixtures
 
-  alias SnowPortal.Accounts
+  alias Resman.Accounts
 
   setup do
     user = user_fixture()

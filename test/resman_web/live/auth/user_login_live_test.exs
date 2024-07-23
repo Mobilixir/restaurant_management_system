@@ -1,8 +1,8 @@
-defmodule SnowPortalWeb.UserLoginLiveTest do
-  use SnowPortalWeb.ConnCase, async: true
-
+defmodule ResmanWeb.UserLoginLiveTest do
+  use ResmanWeb.ConnCase, async: true
+  alias ResmanWeb.UserAuth
   import Phoenix.LiveViewTest
-  import SnowPortal.AccountsFixtures
+  import Resman.AccountsFixtures
 
   describe "Log in page" do
     test "renders log in page", %{conn: conn} do
@@ -16,7 +16,7 @@ defmodule SnowPortalWeb.UserLoginLiveTest do
     test "redirects if already logged in", %{conn: conn} do
       result =
         conn
-        |> log_in_user(user_fixture())
+        |> UserAuth.log_in_user(user_fixture())
         |> live(~p"/users/log_in")
         |> follow_redirect(conn, "/")
 
@@ -43,7 +43,7 @@ defmodule SnowPortalWeb.UserLoginLiveTest do
 
       conn = submit_form(form, conn)
 
-      assert redirected_to(conn) == ~p"/customer/dashboard"
+      assert redirected_to(conn) == ~p"/"
     end
 
     test "redirects to login page with a flash error if there are no valid credentials", %{

@@ -1,11 +1,11 @@
-defmodule SnowPortalWeb.UserConfirmationInstructionsLiveTest do
-  use SnowPortalWeb.ConnCase, async: true
+defmodule ResmanWeb.UserConfirmationInstructionsLiveTest do
+  use ResmanWeb.ConnCase, async: true
 
   import Phoenix.LiveViewTest
-  import SnowPortal.AccountsFixtures
+  import Resman.AccountsFixtures
 
-  alias SnowPortal.Accounts
-  alias SnowPortal.Repo
+  alias Resman.Accounts
+  alias Resman.Repo
 
   setup do
     %{user: user_fixture()}

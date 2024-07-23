@@ -7,6 +7,7 @@ defmodule ResmanWeb.SampleLive do
       swiftui: {ResmanWeb.Layouts.SwiftUI, :app}
     ]
 
+  @impl true
   def render(assigns) do
     ~H"""
     <div>

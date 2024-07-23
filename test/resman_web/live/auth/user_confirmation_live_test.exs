@@ -1,11 +1,11 @@
-defmodule SnowPortalWeb.UserConfirmationLiveTest do
-  use SnowPortalWeb.ConnCase, async: true
+defmodule ResmanWeb.UserConfirmationLiveTest do
+  use ResmanWeb.ConnCase, async: true
 
   import Phoenix.LiveViewTest
-  import SnowPortal.AccountsFixtures
-
-  alias SnowPortal.Accounts
-  alias SnowPortal.Repo
+  import Resman.AccountsFixtures
+  alias ResmanWeb.UserAuth
+  alias Resman.Accounts
+  alias Resman.Repo
 
   setup do
     %{user: user_fixture()}
@@ -57,7 +57,7 @@ defmodule SnowPortalWeb.UserConfirmationLiveTest do
       # when logged in
       conn =
         build_conn()
-        |> log_in_user(user)
+        |> UserAuth.log_in_user(user)
 
       {:ok, lv, _html} = live(conn, ~p"/users/confirm/#{token}")
 

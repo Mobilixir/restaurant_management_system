@@ -1,17 +1,17 @@
-defmodule SnowPortalWeb.UserAuthTest do
-  use SnowPortalWeb.ConnCase, async: true
+defmodule ResmanWeb.UserAuthTest do
+  use ResmanWeb.ConnCase, async: true
 
   alias Phoenix.LiveView
-  alias SnowPortal.Accounts
-  alias SnowPortalWeb.UserAuth
-  import SnowPortal.AccountsFixtures
+  alias Resman.Accounts
+  alias ResmanWeb.UserAuth
+  import Resman.AccountsFixtures
 
-  @remember_me_cookie "_snow_portal_web_user_remember_me"
+  @remember_me_cookie "_resman_web_user_remember_me"
 
   setup %{conn: conn} do
     conn =
       conn
-      |> Map.replace!(:secret_key_base, SnowPortalWeb.Endpoint.config(:secret_key_base))
+      |> Map.replace!(:secret_key_base, ResmanWeb.Endpoint.config(:secret_key_base))
       |> init_test_session(%{})
 
     %{user: user_fixture(), conn: conn}
@@ -22,7 +22,7 @@ defmodule SnowPortalWeb.UserAuthTest do
       conn = UserAuth.log_in_user(conn, user)
       assert token = get_session(conn, :user_token)
       assert get_session(conn, :live_socket_id) == "users_sessions:#{Base.url_encode64(token)}"
-      assert redirected_to(conn) == ~p"/customer/dashboard"
+      assert redirected_to(conn) == ~p"/"
       assert Accounts.get_user_by_session_token(token)
     end
 
@@ -66,7 +66,7 @@ defmodule SnowPortalWeb.UserAuthTest do
 
     test "broadcasts to the given live_socket_id", %{conn: conn} do
       live_socket_id = "users_sessions:abcdef-token"
-      SnowPortalWeb.Endpoint.subscribe(live_socket_id)
+      ResmanWeb.Endpoint.subscribe(live_socket_id)
 
       conn
       |> put_session(:live_socket_id, live_socket_id)
@@ -164,7 +164,7 @@ defmodule SnowPortalWeb.UserAuthTest do
       session = conn |> put_session(:user_token, user_token) |> get_session()
 
       socket = %LiveView.Socket{
-        endpoint: SnowPortalWeb.Endpoint,
+        endpoint: ResmanWeb.Endpoint,
         assigns: %{__changed__: %{}, flash: %{}}
       }
 
@@ -176,7 +176,7 @@ defmodule SnowPortalWeb.UserAuthTest do
       session = conn |> get_session()
 
       socket = %LiveView.Socket{
-        endpoint: SnowPortalWeb.Endpoint,
+        endpoint: ResmanWeb.Endpoint,
         assigns: %{__changed__: %{}, flash: %{}}
       }
 

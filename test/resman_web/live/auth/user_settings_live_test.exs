@@ -1,15 +1,15 @@
-defmodule SnowPortalWeb.UserSettingsLiveTest do
-  use SnowPortalWeb.ConnCase, async: true
-
-  alias SnowPortal.Accounts
+defmodule ResmanWeb.UserSettingsLiveTest do
+  use ResmanWeb.ConnCase, async: true
+  alias ResmanWeb.UserAuth
+  alias Resman.Accounts
   import Phoenix.LiveViewTest
-  import SnowPortal.AccountsFixtures
+  import Resman.AccountsFixtures
 
   describe "Settings page" do
     test "renders settings page", %{conn: conn} do
       {:ok, _lv, html} =
         conn
-        |> log_in_user(user_fixture())
+        |> UserAuth.log_in_user(user_fixture())
         |> live(~p"/users/settings")
 
       assert html =~ "Change Email"
@@ -29,7 +29,7 @@ defmodule SnowPortalWeb.UserSettingsLiveTest do
     setup %{conn: conn} do
       password = valid_user_password()
       user = user_fixture(%{password: password})
-      %{conn: log_in_user(conn, user), user: user, password: password}
+      %{conn: UserAuth.log_in_user(conn, user), user: user, password: password}
     end
 
     test "updates the user email", %{conn: conn, password: password, user: user} do
@@ -86,7 +86,7 @@ defmodule SnowPortalWeb.UserSettingsLiveTest do
     setup %{conn: conn} do
       password = valid_user_password()
       user = user_fixture(%{password: password})
-      %{conn: log_in_user(conn, user), user: user, password: password}
+      %{conn: UserAuth.log_in_user(conn, user), user: user, password: password}
     end
 
     test "renders errors with invalid data (phx-change)", %{conn: conn} do
@@ -139,7 +139,7 @@ defmodule SnowPortalWeb.UserSettingsLiveTest do
           Accounts.deliver_user_update_email_instructions(%{user | email: email}, user.email, url)
         end)
 
-      %{conn: log_in_user(conn, user), token: token, email: email, user: user}
+      %{conn: UserAuth.log_in_user(conn, user), token: token, email: email, user: user}
     end
 
     test "updates the user email once", %{conn: conn, user: user, token: token, email: email} do

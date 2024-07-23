@@ -35,4 +35,9 @@ resman-*.tar
 npm-debug.log
 /assets/node_modules/
 
+# Ignore mix.lock
 mix.lock
+
+.elixir_ls/
+
+priv/static/uploads

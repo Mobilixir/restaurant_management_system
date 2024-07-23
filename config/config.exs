@@ -67,12 +67,12 @@ config :logger, :console,
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 
-
 # LVN - Required
 # Registers each available plugin
-config :live_view_native, plugins: [
-  LiveViewNative.SwiftUI
-]
+config :live_view_native,
+  plugins: [
+    LiveViewNative.SwiftUI
+  ]
 
 # LVN - Required
 # Each format must be registered as a mime type add to
@@ -84,15 +84,11 @@ config :mime, :types, %{
 
 # LVN - Required
 # Phoenix must know how to encode each LVN format
-config :phoenix_template, :format_encoders, [
-  swiftui: Phoenix.HTML.Engine
-]
+config :phoenix_template, :format_encoders, swiftui: Phoenix.HTML.Engine
 
 # LVN - Required
 # Phoenix must know how to compile neex templates
-config :phoenix, :template_engines, [
-  neex: LiveViewNative.Engine
-]
+config :phoenix, :template_engines, neex: LiveViewNative.Engine
 
 # LVN - Required, you must configure LiveView Native Stylesheets
 # on where class names shoudl be extracted from

@@ -356,4 +356,6 @@ defmodule Resman.Accounts do
       {:error, :user, changeset, _} -> {:error, changeset}
     end
   end
+
+  def list_user_role_types, do: Ecto.Enum.values(User, :role)
 end

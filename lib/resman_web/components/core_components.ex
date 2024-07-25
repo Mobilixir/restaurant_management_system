@@ -366,6 +366,82 @@ defmodule ResmanWeb.CoreComponents do
     """
   end
 
+  @doc """
+  Generate a checkbox group for multi-select.
+
+  ## Examples
+
+    <.checkgroup
+      field={@form[:genres]}
+      label="Genres"
+      options={[{"Fantasy", "fantasy"}, {"Science Fiction", "sci-fi"}]}
+      selected={[{"Fantasy", "fantasy"}]}
+    />
+
+  """
+  attr :name, :any
+
+  attr :field, Phoenix.HTML.FormField,
+    doc: "a form field struct retrieved from the form, for example: @form[:genres]"
+
+  attr :required, :boolean, default: false
+
+  attr :options, :list,
+    default: [],
+    doc: "the options to pass to Phoenix.HTML.Form.options_for_select/2"
+
+  attr :disabled, :list, default: [], doc: "the list of options that are disabled"
+
+  attr :selected, :list,
+    default: [],
+    doc: "the currently selected options, to know which boxes are checked"
+
+  def checkgroup(%{field: %Phoenix.HTML.FormField{} = field} = assigns) do
+    assigns =
+      assigns
+      |> assign(:name, "#{field.name}[]")
+
+    ~H"""
+    <div class="mt-2">
+      <%= for opt <- @options do %>
+        <div class="relative flex gap-x-3">
+          <div class="flex h-6 items-center">
+            <input
+              id={opt.id}
+              name={@name}
+              type="checkbox"
+              value={opt.id}
+              class={
+                if opt in @disabled do
+                  "h-4 w-4 rounded border-gray-300 text-gray-300 focus:ring-indigo-600"
+                else
+                  "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                end
+              }
+              checked={opt in @selected}
+              disabled={opt in @disabled}
+            />
+          </div>
+          <div class="text-sm leading-6">
+            <label
+              for={opt.id}
+              class={
+                if opt in @disabled do
+                  "text-base font-semibold text-gray-300"
+                else
+                  "text-base font-semibold text-gray-900"
+                end
+              }
+            >
+              <%= opt.name %>
+            </label>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    """
+  end
+
   # All other inputs text, datetime-local, url, password, etc. are handled here...
   def input(assigns) do
     ~H"""

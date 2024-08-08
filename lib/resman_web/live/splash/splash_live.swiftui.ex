@@ -3,13 +3,19 @@ defmodule ResmanWeb.SplashLive.SwiftUI do
 
   def render(assigns, _interface) do
     ~LVN"""
-    <VStack id="hello-ios">
-      <HStack>
-        <.image url={~p"/images/splash/splash_mb_left.png"} class="rotationEffect(.degrees(0))"/>
-      </HStack>
-      <HStack>
-        <.image url={~p"/images/splash/splash_mb_right.png"} class="rotationEffect(.degrees(0))"/>
-      </HStack>
+    <VStack id="splash-ios" style={
+        "
+          frame(maxHeight: .infinity);
+          frame(maxWidth: .infinity);
+        "
+      }>
+        <AsyncImage url={~p"/images/splash/splash_mb.png"} style={
+          "
+            resizable();
+            scaledToFit();
+            scaleEffect(0.49);
+          "
+          }/>
     </VStack>
     """
   end

@@ -266,7 +266,6 @@ defmodule ResmanWeb.CoreComponents.SwiftUI do
     ~LVN"""
     <VStack style={[
       "navigationTitle(:title)",
-      "navigationSubtitle(:subtitle)",
       "navigationBarTitleDisplayMode(.automatic)",
       "toolbar(content: :toolbar)"
     ]}>

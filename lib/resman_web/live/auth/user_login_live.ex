@@ -4,8 +4,6 @@ defmodule ResmanWeb.UserLoginLive do
 
   @login_options [{"Email", "email"}, {"Username", "username"}]
 
-  @valid_options Enum.map(@login_options, fn {_text, val} -> val end)
-
   def render(assigns) do
     ~H"""
     <div class="flex flex-1 justify-between">
@@ -48,7 +46,6 @@ defmodule ResmanWeb.UserLoginLive do
 
   def mount(_params, _session, socket) do
     form = to_form(%{"login_as" => "username"}, as: "user")
-    IO.inspect(form, label: "***** form :=  ")
     {:ok, assign(socket, form: form)}
   end
 

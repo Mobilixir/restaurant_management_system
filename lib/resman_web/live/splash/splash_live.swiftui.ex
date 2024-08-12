@@ -3,20 +3,36 @@ defmodule ResmanWeb.SplashLive.SwiftUI do
 
   def render(assigns, _interface) do
     ~LVN"""
-    <VStack id="splash-ios" style={
-        "
-          frame(maxHeight: .infinity);
-          frame(maxWidth: .infinity);
-        "
-      }>
-        <AsyncImage url={~p"/images/splash/splash_mb.png"} style={
-          "
-            resizable();
-            scaledToFit();
-            scaleEffect(0.49);
-          "
-          }/>
-    </VStack>
+    <HStack id="splash-ios">
+      <VStack>
+        <.image url={~p"/images/splash/splash_mb_left.png"}>
+          <:success style={[
+            "resizable()",
+            "scaledToFit()"
+          ]}/>
+        </.image>
+          <Spacer />
+          <VStack>
+          <Text style={"font(.system(size: 60));"}>Res
+            <Text verbatim=" " />
+            <Text style={
+              'foregroundColor(Color(red:255/255, green:123/255, blue:44/255))'
+            }>Man
+            </Text>
+          </Text>
+
+          </VStack>
+      </VStack>
+      <VStack>
+        <Spacer />
+        <.image url={~p"/images/splash/splash_mb_right.png"}>
+          <:success style={[
+            "resizable()",
+            "scaledToFit()"
+          ]}/>
+        </.image>
+      </VStack>
+    </HStack>
     """
   end
 end

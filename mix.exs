@@ -76,15 +76,10 @@ defmodule Resman.MixProject do
       {:mix_test_watch, "~> 1.0", only: [:dev, :test], runtime: false},
       {:waffle, "~> 1.1"},
       {:waffle_ecto, "~> 0.0.11"},
-      {:live_view_native,
-       github: "liveview-native/live_view_native", branch: "main", override: true},
-      {:live_view_native_stylesheet,
-       github: "liveview-native/live_view_native_stylesheet", branch: "main"},
-      {:live_view_native_swiftui,
-       github: "liveview-native/liveview-client-swiftui", branch: "main"},
-      {:live_view_native_live_form, github: "liveview-native/liveview-native-live-form"},
-      {:live_view_native_jetpack,
-       github: "liveview-native/liveview-client-jetpack", branch: "main"}
+      {:live_view_native, "~> 0.3.0"},
+      {:live_view_native_stylesheet, "~> 0.3.0"},
+      {:live_view_native_swiftui, "~> 0.3.0"},
+      {:live_view_native_live_form, "~> 0.3.0"}
     ]
   end
 

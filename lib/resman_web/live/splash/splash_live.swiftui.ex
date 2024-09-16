@@ -15,7 +15,7 @@ defmodule ResmanWeb.SplashLive.SwiftUI do
           <VStack>
           <Text style={"font(.system(size: 60));"}>Res
             <Text verbatim=" " />
-            <Text class="fg-orange">Man
+            <Text style="foregroundStyle(.orange)">Man
             </Text>
           </Text>
 

@@ -32,9 +32,8 @@ defmodule ResmanWeb.SplashLive do
 
   @impl true
   def mount(_params, _session, socket) do
-    IO.inspect(socket, label: "*****")
-    
     Process.send_after(self(), :clear_flash, 3000)
+
     {:ok, socket}
   end
 
